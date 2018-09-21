@@ -1,12 +1,19 @@
 class Restfull::Restaurant
   attr_accessor :name, :location1, :location2, :cuisine, :more_info
   
+  @@all = []
+  
+  def initialize(name, location1, location2, cuisine, more_info)
+    @name = name
+    @location1 = location1
+    @location2 = location2
+    @cuisine = cuisine
+    @more_info = more_info
+    @@all << self
+  end
+  
   def self.top_pick
-    #puts "71Above"
-    #puts "633 W. Fifth St."
-    #puts "Los Angeles, California 90071"
-    #puts "Fine Dining"
-    #puts "For more info: https://www.laweekly.com/location/71above-7561812"
+
     
     top_pick = self.new
     top_pick.name = "71Above"

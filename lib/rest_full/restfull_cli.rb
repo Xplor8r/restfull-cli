@@ -60,7 +60,7 @@ class Restfull::CLI
           
     input = gets.strip.downcase
     if input == "n"
-      puts "bon appetit!"
+      puts "Bon appetit!"
     elsif input == "y"
       list_restaurant2
       more_help?
