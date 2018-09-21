@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "restfull/cli"
+require "rest_full/rest_full_cli"
 
 require "irb"
 IRB.start
