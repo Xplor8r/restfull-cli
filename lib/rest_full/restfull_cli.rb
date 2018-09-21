@@ -71,7 +71,12 @@ class Restfull::CLI
   end
   
   def list_restaurant
-    
+    @restaurant = Restfull::Restaurant.top_pick
+    puts "#{@restaurant.name}"
+    puts "#{@restaurant.location1}"
+    puts "#{@restaurant.location2}"
+    puts "#{@restaurant.cuisine}"
+    puts "#{@restaurant.more_info}"
   end
   
   def list_restaurant2
