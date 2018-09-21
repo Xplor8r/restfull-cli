@@ -4,40 +4,69 @@ class Restfull::CLI
  
   def call
     greeting
+    in_la?
   end
  
   def greeting
     puts "Welcom to RestFull LA!"
+  end
+  
+  def in_la?
     puts "Are you in LA? (y/n)"
    
     input = gets.strip.downcase
     if input == "n"
       puts "No worries. Take care!"
+    elsif input == "y"
+      hungry?
     else
-      puts "Are you Hungry? (y/n)"
+      puts "Please enter y for yes or n for no."
+      in_la?
+    end
+  end
+  
+  def hungry?
+    puts "Are you Hungry? (y/n)"
       
-      input = gets.strip.downcase
-      if input == "n"
-        puts "It's all good! Maybe next time!"
-      elsif input == "y"
-        puts "Need Help finding a restaurant in LA? (y/n)"
+    input = gets.strip.downcase
+    if input == "n"
+      puts "It's all good! Maybe next time!"
+    elsif input == "y"
+      help?
+    else
+      puts "Please enter y for yes or n for no."
+      hungry?
+    end
+  end
+  
+  def help?
+    puts "Need help finding a restaurant in LA? (y/n)"
         
-        input = gets.strip.downcase
-        if input == "n"
-          puts "Ok! Hope you enjoy a great meal in LA!"
-        elsif input == "y"
-          puts "Great! Here's your first top-pick LA restaurant!"
-          list_restaurant
-          puts "Would you like another suggestion? (y/n)"
+    input = gets.strip.downcase
+      if input == "n"
+      puts "Ok! Hope you enjoy a great meal in LA!"
+      elsif input == "y"
+        puts "Great! Here's your first top-pick LA restaurant!"
+        list_restaurant
+        more_help?
+      else
+        puts "Please enter y for yes or n for no."
+        help?
+      end  
+  end
+  
+  def more_help?
+    puts "Would you like another suggestion? (y/n)"
           
-          input = gets.strip.downcase
-          if input == "n"
-            puts "bon appetit!"
-          elsif input == "y"
-            list_restaurant2
-          end
-        end
-      end
+    input = gets.strip.downcase
+    if input == "n"
+      puts "bon appetit!"
+    elsif input == "y"
+      list_restaurant2
+      more_help?
+    else
+      puts "Please enter y for yes or n for no."
+      more_help?
     end
   end
   
