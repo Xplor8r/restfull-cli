@@ -6,8 +6,8 @@ require "restfull/cli/version"
 Gem::Specification.new do |spec|
   spec.name          = "restfull-cli"
   spec.version       = Restfull::Cli::VERSION
-  spec.authors       = ["'Michael Pieschel'"]
-  spec.email         = ["'sixtyhectares@yahoo.com'"]
+  spec.authors       = ["Michael Pieschel"]
+  spec.email         = ["sixtyhectares@yahoo.com"]
 
   spec.summary       = "Find a top restaurant in LA."
   spec.description   = "Rest Full LA is the app that helps the restless and empty in LA to Rest Full in LA!"
