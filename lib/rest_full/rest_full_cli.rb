@@ -1,8 +1,10 @@
-require "rest_full/version"
 
 class Restfull::CLI
  
   def call
+    doc = Nokogiri::HTML(open("https://www.laweekly.com/restaurants/guide"))
+    binding.pry
+    
     greeting
     in_la?
   end
@@ -71,6 +73,7 @@ class Restfull::CLI
   end
   
   def list_restaurant
+   
     @restaurant = Restfull::Restaurant.top_pick
     puts "#{@restaurant.name}"
     puts "#{@restaurant.location1}"
