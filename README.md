@@ -1,8 +1,6 @@
-# Restfull::Cli
+# RestFull::Cli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/restfull/cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Are you Hungry? Are you in LA? Need help finding a restaurant? You're in the right place! You've found the app that helps the restless and empty in LA to Rest Full in LA!
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Once the gem has been installed simply answer the yes or no (y/n) questions and discover your new favorite LA restaurant!
 
 ## Development
 
