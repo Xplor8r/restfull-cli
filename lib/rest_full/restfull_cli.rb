@@ -1,7 +1,5 @@
 require "restfull/cli/version"
-
-module Restfull
-  module Cli
-    # Your code goes here...
-  end
+class RestFull::CLI
+ 
 end
+
