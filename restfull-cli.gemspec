@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Find a top restaurant in LA."
   spec.description   = "Rest Full LA is the app that helps the restless and empty in LA to Rest Full in LA!"
+  spec.homepage      =  "https://github.com/Xplor8r/restfull-cli"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
