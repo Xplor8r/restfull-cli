@@ -3,7 +3,7 @@ class Restfull::Restaurant
   
   @@all = []
   
-  def initialize(name, location1, location2, cuisine, more_info)
+  def initialize
     @name = name
     @location1 = location1
     @location2 = location2
