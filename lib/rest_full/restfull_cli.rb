@@ -71,11 +71,7 @@ class Restfull::CLI
   end
   
   def list_restaurant
-    puts "71Above"
-    puts "633 W. Fifth St."
-    puts "Los Angeles, California 90071"
-    puts "Fine Dining"
-    puts "For more info: https://www.laweekly.com/location/71above-7561812"
+    
   end
   
   def list_restaurant2
