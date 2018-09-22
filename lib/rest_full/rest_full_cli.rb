@@ -2,7 +2,8 @@
 class Restfull::CLI
  
   def call
-    doc = Nokogiri::HTML(open("https://www.laweekly.com/restaurants/guide"))
+    
+    
     binding.pry
     
     greeting
