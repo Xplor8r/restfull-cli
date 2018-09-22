@@ -2,10 +2,6 @@
 class Restfull::CLI
  
   def call
-    
-    
-    binding.pry
-    
     greeting
     in_la?
   end

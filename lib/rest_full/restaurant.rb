@@ -13,8 +13,8 @@ class Restfull::Restaurant
   end
   
   def self.top_pick
+    Restfull::Scraper.scrape_page
 
-    
     top_pick = self.new
     top_pick.name = "71Above"
     top_pick.location = "633 W. Fifth St.Los Angeles, California 90071"
