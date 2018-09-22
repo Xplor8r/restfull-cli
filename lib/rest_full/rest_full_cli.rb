@@ -7,19 +7,23 @@ class Restfull::CLI
   end
  
   def greeting
-    puts "Welcom to RestFull LA!"
+    puts ""
+    puts "WELCOME TO RESTFULL LA!"
   end
   
   def in_la?
+    puts ""
     puts "Are you in LA? (y/n)"
    
     input = gets.strip.downcase
     if input == "n"
       puts "No worries. Take care!"
     elsif input == "y"
+      puts ""
       hungry?
     else
       puts "Please enter y for yes or n for no."
+      puts ""
       in_la?
     end
   end
@@ -31,9 +35,11 @@ class Restfull::CLI
     if input == "n"
       puts "It's all good! Maybe next time!"
     elsif input == "y"
+      puts ""
       help?
     else
       puts "Please enter y for yes or n for no."
+      puts ""
       hungry?
     end
   end
@@ -46,7 +52,9 @@ class Restfull::CLI
       puts "Ok! Hope you enjoy a great meal in LA!"
       elsif input == "y"
         puts "Great! Here's your first top-pick LA restaurant!"
+        puts ""
         list_restaurant
+        puts ""
         more_help?
       else
         puts "Please enter y for yes or n for no."
@@ -59,9 +67,11 @@ class Restfull::CLI
           
     input = gets.strip.downcase
     if input == "n"
-      puts "Bon appetit!"
+      puts "Bon appetit!".green
     elsif input == "y"
-      list_restaurant2
+      puts ""
+      list_restaurant
+      puts ""
       more_help?
     else
       puts "Please enter y for yes or n for no."
@@ -72,21 +82,11 @@ class Restfull::CLI
   def list_restaurant
    
     @restaurant = Restfull::Restaurant.top_pick
+    
     puts "#{@restaurant.name}"
-    puts "#{@restaurant.location1}"
-    puts "#{@restaurant.location2}"
-    puts "#{@restaurant.cuisine}"
+    puts "#{@restaurant.location}"
+    puts "#{@restaurant.cuisines}"
     puts "#{@restaurant.more_info}"
   end
-  
-  def list_restaurant2
-    puts "A-Frame"
-    puts "12565 Washington Blvd."
-    puts "Culver City, CA 90066"
-    puts "Gastro Pub, Hawaiian, International"
-    puts "For more info: https://www.laweekly.com/location/a-frame-2195616"
-  end
- 
- 
 end
 
