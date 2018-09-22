@@ -2,8 +2,6 @@
 class Restfull::Restaurant
   attr_accessor :name, :location, :cuisines, :more_info
   
-
-  
   def self.top_pick
     restaurants = Restfull::Scraper.scrape_page
     top_pick = self.new
