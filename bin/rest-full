@@ -1,3 +1,4 @@
+!#/usr/bin/env ruby
 require "bundler/setup"
 require_relative '../config/environment'
 Restfull::CLI.new.call
