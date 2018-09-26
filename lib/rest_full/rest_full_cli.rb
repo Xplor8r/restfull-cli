@@ -3,6 +3,7 @@ class Restfull::CLI
  
   def call
     greeting
+    Restfull::Scraper.scrape_page
     in_la?
   end
  
