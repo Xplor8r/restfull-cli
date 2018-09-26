@@ -5,7 +5,7 @@ require "rest_full/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "restfull-cli"
-  spec.version       = Restfull::Cli::VERSION
+  spec.version       = Restfull::VERSION
   spec.authors       = ["Michael Pieschel"]
   spec.email         = ["sixtyhectares@yahoo.com"]
 
