@@ -85,7 +85,7 @@ class Restfull::CLI
   end
   
   def list_restaurant
-    restaurant = Restfull::Restaurant.top_pick
+    restaurant = Restfull::Scraper.top_pick
     
     puts "Name: #{restaurant.name}"
     puts "Address: #{restaurant.location}"
