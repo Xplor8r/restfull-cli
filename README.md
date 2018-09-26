@@ -1,6 +1,6 @@
 # RestFull::Cli
 
-Are you Hungry? Are you in LA? Need help finding a restaurant? You're in the right place! You've found the app that helps the restless and empty in LA to Rest Full in LA!
+Are you Hungry? Are you in LA? Need help finding a restaurant? You're in the right place! You've found the app that helps the restless and empty in LA to rest and be full in LA!
 
 ## Installation
 
