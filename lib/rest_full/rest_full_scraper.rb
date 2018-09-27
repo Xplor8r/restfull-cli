@@ -16,4 +16,10 @@ class Restfull::Scraper
       end
     end
   end
+  
+  def self.scrape_info_page
+    info_doc = Nokogiri::HTML(open(new_restaurant.more_info))
+    new_restaurant.name = info_doc.css("h1").text
+    new_restaurant.description = info_doc.css(".description").text
+  end
 end
