@@ -1,6 +1,8 @@
 
+
 class Restfull::CLI
- 
+  @@count = 0
+  
   def call
     greeting
     Restfull::Scraper.scrape_page
@@ -19,7 +21,7 @@ class Restfull::CLI
     input = gets.strip.downcase
     if input == "n"
       puts ""
-      puts "No worries. Take care!"
+      goodbye
     elsif input == "y"
       hungry?
     else
@@ -36,9 +38,11 @@ class Restfull::CLI
     input = gets.strip.downcase
     if input == "n"
       puts ""
-      puts "It's all good! Maybe next time!"
+      goodbye
     elsif input == "y"
-      help?
+      puts ""
+      puts "Would you like me to select an 'A-list' restaurant for you? (y/n)"
+      random_pick?
     else
       puts ""
       puts "Please enter y for yes or n for no."
@@ -46,52 +50,95 @@ class Restfull::CLI
     end
   end
   
-  def help?
+  def a_list?
     puts ""
-    puts "Need help finding a restaurant in LA? (y/n)"
+    puts "Would you like a list of 'A-list' restaurants in LA? (y/n)"
         
     input = gets.strip.downcase
       if input == "n"
-      puts "Ok! Hope you enjoy a great meal in LA!"
+      bon_appetit
       elsif input == "y"
         puts ""
-        puts "Great! Here's your first top-pick LA restaurant!"
+        puts "Great! Here's a list of 'A-list' LA restaurants!"
         puts ""
         list_restaurant
-        more_help?
+        more_info?
       else
         puts ""
         puts "Please enter y for yes or n for no."
-        help?
+        a_list?
       end  
   end
   
-  def more_help?
+  def list_restaurant
+    restaurant = Restfull::Restaurant.all
+    restaurant.each_with_index {|restaurant, index| puts "#{index + 1}: #{restaurant.name}"}
+  end
+  
+  def more_info?
     puts ""
-    puts "Would you like another suggestion? (y/n)"
-          
+    puts "Please select a restaurant for more_details."
+    puts "Enter a number between 1 and #{Restfull::Restaurant.all.length} or type e to exit. "
+
+    input = gets.strip.downcase
+    if input.to_i > 0 && input.to_i <= Restfull::Restaurant.all.length 
+      restaurant = Restfull::Restaurant.all[input.to_i-1]
+      puts ""
+      puts "Name: #{restaurant.name}"
+      puts "Address: #{restaurant.location}"
+      puts "Cuisines: #{restaurant.cuisines}"
+      puts "Link to more info: #{restaurant.more_info}"
+      puts ""
+      more_info?
+    elsif input == "e"
+      bon_appetit
+    else
+      puts "Not a valid selection."
+      more_info?
+    end
+    
+  end
+  
+  def random_pick?
+    
     input = gets.strip.downcase
     if input == "n"
       puts ""
-      puts "Bon appetit!"
+      a_list?
     elsif input == "y"
-      puts ""
-      list_restaurant
-      more_help?
+      list_pick
+      puts "Would you like me to select another 'A-list' restaurant for you? (y/n)"
+      random_pick?
     else
       puts ""
       puts "Please enter y for yes or n for no."
-      more_help?
+      random_pick?
+    end
+  end  
+
+  def list_pick
+    pick = Restfull::Restaurant.all
+    index = @@count
+    if pick[index] != nil
+      puts ""
+      puts "Name: #{pick[index].name}"
+      puts "Address: #{pick[index].location}"
+      puts "Cuisines: #{pick[index].cuisines}"
+      puts "Link to more info: #{pick[index].more_info}"
+      puts ""
+      @@count += 1
+    else
+      puts ""
+      puts "Sorry, I don't have any more 'A-list' picks."
+      a_list?
     end
   end
   
-  def list_restaurant
-    restaurant = Restfull::Scraper.top_pick
-    
-    puts "Name: #{restaurant.name}"
-    puts "Address: #{restaurant.location}"
-    puts "Cuisines: #{restaurant.cuisines}"
-    puts "For more info: #{restaurant.more_info}"
+  def goodbye
+    puts "No worries. Take care!"
+  end
+  
+  def bon_appetit
+    puts "Bon appetit!"
   end
 end
-
