@@ -8,11 +8,10 @@ class Restfull::Scraper
       restaurant.css("li").each do |info|
         if info.css("div.location a").text != ""
           new_restaurant = Restfull::Restaurant.new
-          new_restaurant.name = info.css("div.location a").text,
-          new_restaurant.location = info.css("div.address").text,
-          new_restaurant.cuisines = info.css("div.cuisines").text,
+          new_restaurant.name = info.css("div.location a").text
+          new_restaurant.location = info.css("div.address").text
+          new_restaurant.cuisines = info.css("div.cuisines").text
           new_restaurant.more_info = "https://www.laweekly.com" + info.css("div.location a").attr("href").value
-        }
         end
       end
     end
