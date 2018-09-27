@@ -1,6 +1,3 @@
-
-
-
 class Restfull::CLI
   @@count = 0
   
@@ -55,19 +52,19 @@ class Restfull::CLI
     puts "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
     input = gets.strip.downcase
     
-      if input == "n"
+    if input == "n"
       puts "Bon appetit!".color(:yellow)
-      elsif input == "y"
-        puts ""
-        puts "Great! Here's a list of 'A-list' LA restaurants!".color(:cyan) 
-        puts ""
-        list_restaurant
-        more_info?
-      else
-        puts ""
-        puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n ".color(:red) + "for no.".color(:cyan) 
-        a_list?
-      end  
+    elsif input == "y"
+      puts ""
+      puts "Great! Here's a list of 'A-list' LA restaurants!".color(:cyan) 
+      puts ""
+      list_restaurant
+      more_info?
+    else
+      puts ""
+      puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n ".color(:red) + "for no.".color(:cyan)
+      a_list?
+    end  
   end
   
   def list_restaurant
@@ -78,7 +75,7 @@ class Restfull::CLI
   def more_info?
     puts ""
     puts "Please select a restaurant for more_details.".color(:cyan) 
-    puts "Enter a number between 1 and #{Restfull::Restaurant.all.length} or type e to exit. ".color(:cyan) 
+    puts "Enter a number between ".color(:cyan) + "1 ".color(:yellow) + "and".color(:cyan) + " #{Restfull::Restaurant.all.length}".color(:yellow) + " or type ".color(:cyan) + "e ".color(:yellow) + "to exit.".color(:cyan) 
     input = gets.strip.downcase
     
     if input == "e"
@@ -138,5 +135,4 @@ class Restfull::CLI
   def goodbye
     puts "No worries. Take care!".color(:yellow) 
   end
-  
 end
