@@ -1,5 +1,6 @@
 
 
+
 class Restfull::CLI
   @@count = 0
   
@@ -11,14 +12,14 @@ class Restfull::CLI
  
   def greeting
     puts ""
-    puts "WELCOME TO RESTFULL LA!"
+    puts "WELCOME TO RESTFULL LA!".color(:white).background(:cyan)
   end
   
   def in_la?
     puts ""
-    puts "Are you in LA? (y/n)"
-   
+    puts "Are you in LA? (".color(:cyan) + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
     input = gets.strip.downcase
+    
     if input == "n"
       puts ""
       goodbye
@@ -26,46 +27,45 @@ class Restfull::CLI
       hungry?
     else
       puts ""
-      puts "Please enter y for yes or n for no."
+      puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n".color(:red) + "for no.".color(:cyan) 
       in_la?
     end
   end
   
   def hungry?
     puts ""
-    puts "Are you Hungry? (y/n)"
-      
+    puts "Are you Hungry? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
     input = gets.strip.downcase
+    
     if input == "n"
       puts ""
       goodbye
     elsif input == "y"
       puts ""
-      puts "Would you like me to select an 'A-list' restaurant for you? (y/n)"
+      puts "Would you like me to select an 'A-list' restaurant for you? (".color(:cyan)  + "y".color(:green) + "/".color(:blue)  + "n".color(:red) + ")".color(:cyan) 
       random_pick?
     else
       puts ""
-      puts "Please enter y for yes or n for no."
+      puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n ".color(:red) + "for no.".color(:cyan) 
       hungry?
     end
   end
   
   def a_list?
-    puts ""
-    puts "Would you like a list of 'A-list' restaurants in LA? (y/n)"
-        
+    puts "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
     input = gets.strip.downcase
+    
       if input == "n"
-      bon_appetit
+      puts "Bon appetit!".color(:yellow)
       elsif input == "y"
         puts ""
-        puts "Great! Here's a list of 'A-list' LA restaurants!"
+        puts "Great! Here's a list of 'A-list' LA restaurants!".color(:cyan) 
         puts ""
         list_restaurant
         more_info?
       else
         puts ""
-        puts "Please enter y for yes or n for no."
+        puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n ".color(:red) + "for no.".color(:cyan) 
         a_list?
       end  
   end
@@ -77,12 +77,15 @@ class Restfull::CLI
   
   def more_info?
     puts ""
-    puts "Please select a restaurant for more_details."
-    puts "Enter a number between 1 and #{Restfull::Restaurant.all.length} or type e to exit. "
-
+    puts "Please select a restaurant for more_details.".color(:cyan) 
+    puts "Enter a number between 1 and #{Restfull::Restaurant.all.length} or type e to exit. ".color(:cyan) 
     input = gets.strip.downcase
-    if input.to_i > 0 && input.to_i <= Restfull::Restaurant.all.length 
+    
+    if input == "e"
+      puts "Bon appetit!".color(:yellow)
+    elsif input.to_i > 0 && input.to_i <= Restfull::Restaurant.all.length 
       restaurant = Restfull::Restaurant.all[input.to_i-1]
+      
       puts ""
       puts "Name: #{restaurant.name}"
       puts "Address: #{restaurant.location}"
@@ -90,28 +93,25 @@ class Restfull::CLI
       puts "Link to more info: #{restaurant.more_info}"
       puts ""
       more_info?
-    elsif input == "e"
-      bon_appetit
     else
       puts "Not a valid selection."
       more_info?
     end
-    
   end
   
   def random_pick?
-    
     input = gets.strip.downcase
+    
     if input == "n"
       puts ""
       a_list?
     elsif input == "y"
       list_pick
-      puts "Would you like me to select another 'A-list' restaurant for you? (y/n)"
+      puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
       random_pick?
     else
       puts ""
-      puts "Please enter y for yes or n for no."
+      puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n ".color(:red) + "for no.".color(:cyan) 
       random_pick?
     end
   end  
@@ -119,6 +119,7 @@ class Restfull::CLI
   def list_pick
     pick = Restfull::Restaurant.all
     index = @@count
+    
     if pick[index] != nil
       puts ""
       puts "Name: #{pick[index].name}"
@@ -129,16 +130,13 @@ class Restfull::CLI
       @@count += 1
     else
       puts ""
-      puts "Sorry, I don't have any more 'A-list' picks."
+      puts "Sorry, I don't have any more 'A-list' picks.".color(:cyan) 
       a_list?
     end
   end
   
   def goodbye
-    puts "No worries. Take care!"
+    puts "No worries. Take care!".color(:yellow) 
   end
   
-  def bon_appetit
-    puts "Bon appetit!"
-  end
 end
