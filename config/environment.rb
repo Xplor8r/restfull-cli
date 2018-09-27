@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
-
+require 'rainbow'
 require 'pry'
 
 require_relative '../lib/rest_full/version'
