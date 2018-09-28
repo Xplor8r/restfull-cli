@@ -24,7 +24,7 @@ class Restfull::CLI
     
     if input == "n"
       puts ""
-      come_back
+      puts "Ok. If you are ever in LA make sure to visit RestFull LA again!".color(:yellow)
     elsif input == "y"
       hungry?
     else
@@ -49,7 +49,7 @@ class Restfull::CLI
     
     if input == "n"
       puts ""
-      goodbye
+      puts "No worries. Hope you find a great meal in LA!".color(:yellow) 
     elsif input == "y"
       puts ""
       puts "Would you like me to select an 'A-list' restaurant for you? (".color(:cyan)  + y_n
@@ -73,13 +73,54 @@ class Restfull::CLI
       random_pick?
     end
   end 
+
+  def list_pick
+    pick = Restfull::Restaurant.all
+    index = @@count
+    
+    if pick[index] != nil
+      puts ""
+      puts "Name: #{pick[index].name}"
+      puts "Address: #{pick[index].location}"
+      puts "Cuisines: #{pick[index].cuisines}"
+      puts "Details: #{pick[index].details}"
+  
+      more_details = Restfull::Scraper.scrape_more_info("#{pick[index].more_info}").split.join(" ").chomp("Read our full review.")
+      details_from_pick(more_details)
+      @@count += 1
+      random_pick?
+    else
+      puts ""
+      puts "Sorry, I don't have any more 'A-list' picks.".color(:cyan) 
+      a_list?
+    end
+  end
+  
+  def details_from_pick(more_details)
+    puts ""
+    puts "Would you like to read more details? (".color(:cyan)  + y_n
+    input = gets.strip.downcase
+    
+    if input == "y"
+      puts ""
+      puts more_details
+      puts ""
+      puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
+    elsif input == "n"
+      puts ""
+      puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
+    else
+      yes_no
+    end
+  end
   
   def a_list?
     puts "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + y_n
     input = gets.strip.downcase
     
     if input == "n"
-      bon_appetit
+      puts ""
+      puts "Farewell! Bon appetit!".color(:yellow)
     elsif input == "y"
       puts ""
       puts "Great! Here's a list of 'A-list' LA restaurants!".color(:cyan) 
@@ -104,81 +145,39 @@ class Restfull::CLI
     input = gets.strip.downcase
     
     if input == "e"
-      bon_appetit
+      puts ""
+      puts "Farewell! Bon appetit!".color(:yellow)
     elsif input.to_i > 0 && input.to_i <= Restfull::Restaurant.all.length 
       restaurant = Restfull::Restaurant.all[input.to_i-1]
-      
       puts ""
       puts "Name: #{restaurant.name}"
       puts "Address: #{restaurant.location}"
       puts "Cuisines: #{restaurant.cuisines}"
       puts "Details: #{restaurant.details}"
-      puts ""
-      puts "Would you like to read more details? (".color(:cyan) + y_n
-      input2 = gets.strip.downcase
-    
-      if input2 == "y"
-        details = Restfull::Scraper.scrape_more_info("#{restaurant.more_info}").split.join(" ").chomp("Read our full review.")
-        puts ""
-        puts details
-        puts ""
-        more_info?
-      elsif input2 == "n"
-        random_pick?
-      else
-        yes_no
-        more_info?
-      end
+      
+      more_details = Restfull::Scraper.scrape_more_info("#{restaurant.more_info}").split.join(" ").chomp("Read our full review.")
+      details_from_list_pick(more_details)
     else
       puts "Not a valid selection."
       more_info?
     end
   end
 
-  def list_pick
-    pick = Restfull::Restaurant.all
-    index = @@count
+  def details_from_list_pick(more_details)
+    puts ""
+    puts "Would you like to read more details? (".color(:cyan) + y_n
+    input = gets.strip.downcase
     
-    if pick[index] != nil
+    if input == "y"
       puts ""
-      puts "Name: #{pick[index].name}"
-      puts "Address: #{pick[index].location}"
-      puts "Cuisines: #{pick[index].cuisines}"
-      puts "Details: #{pick[index].details}"
+      puts more_details
       puts ""
-      puts "Would you like to read more details? (".color(:cyan)  + y_n
-      input = gets.strip.downcase
-    
-      if input == "y"
-        details = Restfull::Scraper.scrape_more_info("#{pick[index].more_info}").split.join(" ").chomp("Read our full review.")
-        puts ""
-        puts details
-        puts ""
-        puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
-      elsif input == "n"
-        puts ""
-        puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
-      else
-        yes_no
-      end
-      @@count += 1
+      more_info?
+    elsif input == "n"
       random_pick?
     else
-      puts ""
-      puts "Sorry, I don't have any more 'A-list' picks.".color(:cyan) 
-      a_list?
+      yes_no
+      more_info?
     end
-  end
-  
-  def come_back
-    puts "Ok. If you are ever in LA make sure to visit RestFull LA again!".color(:yellow)
-  end
-
-  def bon_appetit
-    puts "Farewell! Bon appetit!".color(:yellow)
-  end
-  
-  def goodbye
-    puts "No worries. Hope you find a great meal in LA!".color(:yellow) 
   end
 end
