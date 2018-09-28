@@ -19,7 +19,7 @@ class Restfull::CLI
   
   def in_la?
     puts ""
-    puts "Are you in LA? (".color(:cyan) + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+    puts "Are you in LA? (".color(:cyan) + y_n
     input = gets.strip.downcase
     
     if input == "n"
@@ -33,14 +33,18 @@ class Restfull::CLI
     end
   end
   
+  def y_n
+    "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+  end
+    
   def yes_no
     puts ""
-    puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n".color(:red) + "for no.".color(:cyan) 
+    puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n".color(:red) + " for no.".color(:cyan) 
   end
   
   def hungry?
     puts ""
-    puts "Are you Hungry? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+    puts "Are you Hungry? (".color(:cyan)  + y_n
     input = gets.strip.downcase
     
     if input == "n"
@@ -48,7 +52,7 @@ class Restfull::CLI
       goodbye
     elsif input == "y"
       puts ""
-      puts "Would you like me to select an 'A-list' restaurant for you? (".color(:cyan)  + "y".color(:green) + "/".color(:blue)  + "n".color(:red) + ")".color(:cyan) 
+      puts "Would you like me to select an 'A-list' restaurant for you? (".color(:cyan)  + y_n
       random_pick?
     else
       yes_no
@@ -64,8 +68,6 @@ class Restfull::CLI
       a_list?
     elsif input == "y"
       list_pick
-      puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
-      random_pick?
     else
       yes_no
       random_pick?
@@ -73,7 +75,7 @@ class Restfull::CLI
   end 
   
   def a_list?
-    puts "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+    puts "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + y_n
     input = gets.strip.downcase
     
     if input == "n"
@@ -112,7 +114,7 @@ class Restfull::CLI
       puts "Cuisines: #{restaurant.cuisines}"
       puts "Details: #{restaurant.details}"
       puts ""
-      puts "Would you like to read more details? (".color(:cyan) + "y".color(:green) + "/".color(:cyan) + "n".color(:red) + ")".color(:cyan) 
+      puts "Would you like to read more details? (".color(:cyan) + y_n
       input2 = gets.strip.downcase
     
       if input2 == "y"
@@ -144,7 +146,7 @@ class Restfull::CLI
       puts "Cuisines: #{pick[index].cuisines}"
       puts "Details: #{pick[index].details}"
       puts ""
-      puts "Would you like to read more details? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+      puts "Would you like to read more details? (".color(:cyan)  + y_n
       input = gets.strip.downcase
     
       if input == "y"
@@ -152,10 +154,10 @@ class Restfull::CLI
         puts ""
         puts details
         puts ""
-        puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+        puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
       elsif input == "n"
         puts ""
-        puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + "y".color(:green) + "/".color(:cyan)  + "n".color(:red) + ")".color(:cyan) 
+        puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
       else
         yes_no
       end
