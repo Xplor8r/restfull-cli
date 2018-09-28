@@ -1,4 +1,7 @@
 !#/usr/bin/env ruby
 require "bundler/setup"
 require_relative '../config/environment'
+
+puts ""
+puts "WELCOME TO RESTFULL LA!".color(:white).background(:cyan)
 Restfull::CLI.new.call
