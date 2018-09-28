@@ -2,34 +2,30 @@ class Restfull::CLI
   @@count = 0
   
   def call
-    greeting
     scrape_restaurants
-    in_la?
+    greeting
   end
   
   def scrape_restaurants
     restaurants = Restfull::Scraper.scrape_page
     Restfull::Restaurant.create_restaurant(restaurants)
   end
-
-  def greeting
-    puts ""
-    puts "WELCOME TO RESTFULL LA!".color(:white).background(:cyan)
+  
+  def new_line
+    "\n"
   end
   
-  def in_la?
-    puts ""
-    puts "Are you in LA? (".color(:cyan) + y_n
+  def greeting
+    puts new_line + "Are you in LA? (".color(:cyan) + y_n
     input = gets.strip.downcase
     
     if input == "n"
-      puts ""
-      puts "Ok. If you are ever in LA make sure to visit RestFull LA again!".color(:yellow)
+      puts new_line + "Ok. If you are ever in LA make sure to visit RestFull LA again!".color(:yellow)
     elsif input == "y"
       hungry?
     else
       yes_no
-      in_la?
+      greeting
     end
   end
   
@@ -38,21 +34,17 @@ class Restfull::CLI
   end
     
   def yes_no
-    puts ""
-    puts "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n".color(:red) + " for no.".color(:cyan) 
+    puts new_line + "Please enter ".color(:cyan)  + "y".color(:green) + " for yes or ".color(:cyan)  + "n".color(:red) + " for no.".color(:cyan) 
   end
   
   def hungry?
-    puts ""
-    puts "Are you Hungry? (".color(:cyan)  + y_n
+    puts new_line + "Are you Hungry? (".color(:cyan)  + y_n
     input = gets.strip.downcase
     
     if input == "n"
-      puts ""
-      puts "No worries. Hope you find a great meal in LA!".color(:yellow) 
+      puts new_line + "No worries. Hope you find a great meal in LA!".color(:yellow) 
     elsif input == "y"
-      puts ""
-      puts "Would you like me to select an 'A-list' restaurant for you? (".color(:cyan)  + y_n
+      puts new_line + "Would you like me to select an 'A-list' restaurant for you? (".color(:cyan)  + y_n
       random_pick?
     else
       yes_no
@@ -64,7 +56,6 @@ class Restfull::CLI
     input = gets.strip.downcase
     
     if input == "n"
-      puts ""
       a_list?
     elsif input == "y"
       list_pick
@@ -79,8 +70,7 @@ class Restfull::CLI
     index = @@count
     
     if pick[index] != nil
-      puts ""
-      puts "Name: #{pick[index].name}"
+      puts new_line + "Name: #{pick[index].name}"
       puts "Address: #{pick[index].location}"
       puts "Cuisines: #{pick[index].cuisines}"
       puts "Details: #{pick[index].details}"
@@ -90,68 +80,58 @@ class Restfull::CLI
       @@count += 1
       random_pick?
     else
-      puts ""
-      puts "Sorry, I don't have any more 'A-list' picks.".color(:cyan) 
+      puts new_line + "Sorry, I don't have any more 'A-list' picks.".color(:cyan) 
       a_list?
     end
   end
   
   def details_from_pick(more_details)
-    puts ""
-    puts "Would you like to read more details? (".color(:cyan)  + y_n
+    puts new_line + "Would you like to read more details? (".color(:cyan)  + y_n
     input = gets.strip.downcase
     
     if input == "y"
-      puts ""
-      puts more_details
-      puts ""
-      puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
+      puts new_line + more_details
+      puts new_line + "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
     elsif input == "n"
-      puts ""
-      puts "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
+      puts new_line + "Would you like me to select another 'A-list' restaurant for you? (".color(:cyan)  + y_n
     else
       yes_no
+      details_from_pick(more_details)
     end
   end
   
   def a_list?
-    puts "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + y_n
+    puts new_line + "Would you like a list of 'A-list' restaurants in LA? (".color(:cyan)  + y_n
     input = gets.strip.downcase
     
     if input == "n"
-      puts ""
-      puts "Farewell! Bon appetit!".color(:yellow)
+      puts new_line + "Farewell! Bon appetit!".color(:yellow)
     elsif input == "y"
-      puts ""
-      puts "Great! Here's a list of 'A-list' LA restaurants!".color(:cyan) 
-      puts ""
+      puts new_line + "Great! Here's a list of 'A-list' LA restaurants!".color(:cyan)
       list_restaurants
       more_info?
     else
       yes_no
-      puts""
       a_list?
     end  
   end
   
   def list_restaurants
     restaurant = Restfull::Restaurant.all
+    puts new_line
     restaurant.each_with_index {|restaurant, index| puts "#{index + 1}: #{restaurant.name}"}
   end
   
   def more_info?
-    puts ""
-    puts "Please select a restaurant for more info.".color(:cyan) 
+    puts new_line + "Please select a restaurant for more info.".color(:cyan) 
     puts "Enter a number between ".color(:cyan) + "1 ".color(:yellow) + "and".color(:cyan) + " #{Restfull::Restaurant.all.length}".color(:yellow) + " or type ".color(:cyan) + "e ".color(:yellow) + "to exit.".color(:cyan) 
     input = gets.strip.downcase
     
     if input == "e"
-      puts ""
-      puts "Farewell! Bon appetit!".color(:yellow)
+      puts new_line + "Farewell! Bon appetit!".color(:yellow)
     elsif input.to_i > 0 && input.to_i <= Restfull::Restaurant.all.length 
       restaurant = Restfull::Restaurant.all[input.to_i-1]
-      puts ""
-      puts "Name: #{restaurant.name}"
+      puts new_line + "Name: #{restaurant.name}"
       puts "Address: #{restaurant.location}"
       puts "Cuisines: #{restaurant.cuisines}"
       puts "Details: #{restaurant.details}"
@@ -159,26 +139,23 @@ class Restfull::CLI
       more_details = Restfull::Scraper.scrape_more_info("#{restaurant.more_info}").split.join(" ").chomp("Read our full review.")
       details_from_list_pick(more_details)
     else
-      puts "Not a valid selection."
+      puts "Not a valid selection.".color(:cyan)
       more_info?
     end
   end
 
   def details_from_list_pick(more_details)
-    puts ""
-    puts "Would you like to read more details? (".color(:cyan) + y_n
+    puts new_line + "Would you like to read more details? (".color(:cyan) + y_n
     input = gets.strip.downcase
     
     if input == "y"
-      puts ""
-      puts more_details
-      puts ""
+      puts new_line + more_details
       more_info?
     elsif input == "n"
       more_info?
     else
       yes_no
-      more_info?
+      details_from_list_pick(more_details)
     end
   end
 end
