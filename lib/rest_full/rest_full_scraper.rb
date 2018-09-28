@@ -19,4 +19,9 @@ class Restfull::Scraper
     end
     restaurants
   end
+  
+  def self.scrape_more_info(more_info)
+    doc = Nokogiri::HTML(open(more_info))
+    doc.css("div.description").text
+  end
 end
