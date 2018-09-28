@@ -3,11 +3,11 @@ class Restfull::CLI
   
   def call
     greeting
-    restaurants
+    scrape_restaurants
     in_la?
   end
   
-  def restaurants
+  def scrape_restaurants
     restaurants = Restfull::Scraper.scrape_page
     Restfull::Restaurant.create_restaurant(restaurants)
   end
@@ -84,7 +84,7 @@ class Restfull::CLI
       puts "Address: #{pick[index].location}"
       puts "Cuisines: #{pick[index].cuisines}"
       puts "Details: #{pick[index].details}"
-  
+      
       more_details = Restfull::Scraper.scrape_more_info("#{pick[index].more_info}").split.join(" ").chomp("Read our full review.")
       details_from_pick(more_details)
       @@count += 1
@@ -129,6 +129,7 @@ class Restfull::CLI
       more_info?
     else
       yes_no
+      puts""
       a_list?
     end  
   end
@@ -174,7 +175,7 @@ class Restfull::CLI
       puts ""
       more_info?
     elsif input == "n"
-      random_pick?
+      more_info?
     else
       yes_no
       more_info?
