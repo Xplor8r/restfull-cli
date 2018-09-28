@@ -11,6 +11,7 @@ class Restfull::Scraper
           :name => info.css("div.location a").text,
           :location => info.css("div.address").text,
           :cuisines => info.css("div.cuisines").text,
+          :details => info.css("p").text,
           :more_info => "https://www.laweekly.com" + info.css("div.location a").attr("href").value
           }
         end

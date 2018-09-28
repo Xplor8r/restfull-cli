@@ -109,6 +109,7 @@ class Restfull::CLI
       puts "Name: #{restaurant.name}"
       puts "Address: #{restaurant.location}"
       puts "Cuisines: #{restaurant.cuisines}"
+      puts "Details: #{restaurant.details}"
       puts "Link to more info: #{restaurant.more_info}"
       puts ""
       more_info?
@@ -127,6 +128,7 @@ class Restfull::CLI
       puts "Name: #{pick[index].name}"
       puts "Address: #{pick[index].location}"
       puts "Cuisines: #{pick[index].cuisines}"
+      puts "Details: #{pick[index].details}"
       puts "Link to more info: #{pick[index].more_info}"
       puts ""
       @@count += 1
