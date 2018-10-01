@@ -1,5 +1,5 @@
 class Restfull::Restaurant
-  attr_accessor :name, :location, :cuisines, :details, :more_info
+  attr_accessor :name, :location, :cuisines, :details, :more_info, :long_details
   @@all = []
   
   def initialize(restaurant)
