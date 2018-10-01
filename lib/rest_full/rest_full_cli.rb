@@ -70,13 +70,10 @@ class Restfull::CLI
     index = @@count
     
     if pick[index] != nil
-      puts new_line + "Name: #{pick[index].name}"
-      puts "Address: #{pick[index].location}"
-      puts "Cuisines: #{pick[index].cuisines}"
-      puts "Details: #{pick[index].details}"
+      print_restaurant(pick[index])
+      Restfull::Scraper.scrape_more_info(pick[index]) if pick[index].long_details == nil
       
-      more_details = Restfull::Scraper.scrape_more_info("#{pick[index].more_info}").split.join(" ").chomp("Read our full review.")
-      details_from_pick(more_details)
+      details_from_pick(pick[index].long_details)
       @@count += 1
       random_pick?
     else
@@ -131,13 +128,10 @@ class Restfull::CLI
       puts new_line + "Farewell! Bon appetit!".color(:yellow)
     elsif input.to_i > 0 && input.to_i <= Restfull::Restaurant.all.length 
       restaurant = Restfull::Restaurant.all[input.to_i-1]
-      puts new_line + "Name: #{restaurant.name}"
-      puts "Address: #{restaurant.location}"
-      puts "Cuisines: #{restaurant.cuisines}"
-      puts "Details: #{restaurant.details}"
+      print_restaurant(restaurant)
       
-      more_details = Restfull::Scraper.scrape_more_info("#{restaurant.more_info}").split.join(" ").chomp("Read our full review.")
-      details_from_list_pick(more_details)
+      Restfull::Scraper.scrape_more_info(restaurant) if restaurant.long_details == nil
+      details_from_list_pick(restaurant.long_details)
     else
       puts "Not a valid selection.".color(:cyan)
       more_info?
@@ -157,5 +151,12 @@ class Restfull::CLI
       yes_no
       details_from_list_pick(more_details)
     end
+  end
+  
+  def print_restaurant(restaurant)
+      puts new_line + "Name: #{restaurant.name}"
+      puts "Address: #{restaurant.location}"
+      puts "Cuisines: #{restaurant.cuisines}"
+      puts "Details: #{restaurant.details}"
   end
 end
