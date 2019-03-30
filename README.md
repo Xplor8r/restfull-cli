@@ -9,7 +9,7 @@
 [![RestFull CLI](https://img.youtube.com/vi/Sl9yNGRtyrw/hqdefault.jpg)](https://youtu.be/Sl9yNGRtyrw)
 
 # Getting Started
-Fork and clone this repo. Next, cd into restfull-cli/bin folder. Then type ruby rest-full into the command line to begin.
+Fork and clone this repo. Next, cd into restfull-cli/bin folder. Run `bundle install` and then run `ruby rest-full` into the command line to begin.
 
 # Usage
 
