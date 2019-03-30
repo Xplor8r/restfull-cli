@@ -6,7 +6,7 @@
 
 # Video Demo(early version)
 
-[![RestFull CLI](https://img.youtube.com/vi/v=Sl9yNGRtyrw&t=56/hqdefault.jpg)](https://youtu.be/v=Sl9yNGRtyrw&t=56)
+[![RestFull CLI](https://img.youtube.com/vi/Sl9yNGRtyrw/hqdefault.jpg)](https://youtu.be/Sl9yNGRtyrw)
 
 # Getting Started
 Fork and clone this repo. Next, cd into restfull-cli/bin folder. Then type ruby rest-full into the command line to begin.
